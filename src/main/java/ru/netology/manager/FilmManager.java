@@ -3,8 +3,6 @@ package ru.netology.manager;
 import lombok.*;
 import ru.netology.domain.Film;
 
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor
 @Data
 
 public class FilmManager {

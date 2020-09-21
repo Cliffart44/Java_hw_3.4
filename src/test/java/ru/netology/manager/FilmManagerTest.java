@@ -1,6 +1,5 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Film;
 
@@ -13,8 +12,6 @@ class FilmManagerTest {
     private Film second = new Film(2, "Ice Age", "ia", "Animation", false);
     private Film third = new Film(3, "Inception", "i", "Science fiction", false);
 
-
-    @BeforeEach
     void setUp() {
         manager.addFilm(first);
         manager.addFilm(second);
@@ -22,26 +19,34 @@ class FilmManagerTest {
     }
 
     @Test
-    void shouldGetAll() {
+    void shouldGetEmpty() {
+        Film[] expected = new Film[0];
         Film[] actual = manager.getAll();
-        Film[] expected = new Film[]{third, second, first};
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldAddFilm() {
-        Film fourth = new Film(4, "Cars", "c", "Animation", false);
-        manager.addFilm(fourth);
+    void shouldGetOne() {
+        manager.addFilm(first);
+        Film[] expected = new Film[]{first};
         Film[] actual = manager.getAll();
-        Film[] expected = new Film[]{fourth, third, second, first};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGetAll() {
+        setUp();
+        Film[] expected = new Film[]{third, second, first};
+        Film[] actual = manager.getAll();
         assertArrayEquals(expected, actual);
     }
 
     @Test
     void shouldGetSeveral() {
+        setUp();
         manager.filmsQuantity(2);
-        Film[] actual = manager.getSeveral();
         Film[] expected = new Film[]{third, second};
+        Film[] actual = manager.getSeveral();
         assertArrayEquals(expected, actual);
     }
 }
